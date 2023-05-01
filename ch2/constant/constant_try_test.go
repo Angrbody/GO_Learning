@@ -1,5 +1,7 @@
 package constant_test
 
+import "testing"
+
 // 连续常量的初始化
 const (
 	Monday = itoa + 1
