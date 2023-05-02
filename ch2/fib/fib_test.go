@@ -2,7 +2,9 @@
 // 在一个赋值语句中可以对多个变量进行赋值
 
 package fib
+
 import "testing"
+
 func TestFibList(t *testing.T) {
 	// var a int = 1
 	// var b int = 1
@@ -15,9 +17,10 @@ func TestFibList(t *testing.T) {
 	b := 1
 
 	t.Log(a)
-	for i := 0 i < 5; i++ {
+	var i int
+	for i = 0; i < 5; i++ {
 		t.Log(" ", b)
-		tmp := a 
+		tmp := a
 		a = b
 		b = tmp + a
 	}
@@ -25,14 +28,14 @@ func TestFibList(t *testing.T) {
 }
 
 func TestExchange(t *testing.T) {
-	a:=1
-	b:=1
+	a := 1
+	b := 1
 	// 1.使用中间变量来交换
-		// tmp:=a 
-		// a=b
-		// b=tmp
-		
+	// tmp:=a
+	// a=b
+	// b=tmp
+
 	// 2. 直接交换
-	a,b = b,a
-	t.Log(a,b)
+	a, b = b, a
+	t.Log(a, b)
 }
