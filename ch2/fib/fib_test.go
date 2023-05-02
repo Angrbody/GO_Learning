@@ -2,7 +2,7 @@
 // 在一个赋值语句中可以对多个变量进行赋值
 
 package fib
-
+import "testing"
 func TestFibList(t *testing.T) {
 	// var a int = 1
 	// var b int = 1

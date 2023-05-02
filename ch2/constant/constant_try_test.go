@@ -4,14 +4,14 @@ import "testing"
 
 // 连续常量的初始化
 const (
-	Monday = itoa + 1
+	Monday = iota + 1
 	Tuesday
 	Wednesday
 )
 
 // 连续位常量的初始化
 const (
-	Readable = 1 << itoa
+	Readable = 1 << iota
 	Writeable
 	Executable
 )
