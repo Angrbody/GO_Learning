@@ -38,3 +38,37 @@ func TestFunc(t *testing.T) {
 	tsSF := timeSpent(slowFunc)
 	t.Log(tsSF(10))
 }
+
+// 多参数输入
+func Sum(ops ...int) int {
+	ret := 0
+	for _, op := range ops {
+		ret += op
+	}
+	return ret
+}
+
+func TestVarParam(t *testing.T) {
+	t.Log(Sum(1, 2, 3, 4))
+	t.Log(Sum(1, 2, 3, 4, 5, 6))
+}
+
+func Clear() {
+	fmt.Println("clear resources.")
+}
+
+// 延迟执行函数
+func TestDefer(t *testing.T) {
+	// 延迟执行的函数（函数退出前执行）
+	// 多用于安全释放资源、锁等收尾工作
+	defer Clear()
+
+	t.Log("started")
+
+	// 程序异常中断，表示不可修复的错误
+	// 即便在这种情况下，defer修饰的函数也会执行
+	panic("fatal error")
+
+	// panic后面的普通代码是不会执行的
+	// fmt.Println("end")
+}
