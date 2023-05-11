@@ -153,3 +153,73 @@ func FindGas(gas, cost []int) int {
 
 // 	return res
 // }
+
+func Min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+func eraseOverlapIntervals(intervals [][]int) int {
+	// 按left从小到大排序
+	sort.Slice(intervals, func(i, j int) bool {
+		if intervals[i][0] == intervals[j][0] {
+			return intervals[i][1] < intervals[j][1]
+		}
+		return intervals[i][0] < intervals[j][0]
+	})
+
+	res := 0
+	win := []int{intervals[0][0], intervals[0][1]}
+
+	for i := 1; i < len(intervals); i++ {
+		if intervals[i][0] > win[1] {
+			win = []int{intervals[i][0], intervals[i][1]}
+			continue
+		}
+		// 有重复，扩大窗口范围
+		res++
+		// win[1] = intervals[i][1]
+	}
+	return res
+}
+
+func TestLeetcode435(t *testing.T) {
+	intervals := [][]int{
+		{-52, 31},
+		{-73, -26},
+		{82, 97},
+		{-65, -11},
+		{-62, -49},
+		{95, 99},
+		{58, 95},
+		{-31, 49},
+		{66, 98},
+		{-63, 2},
+		{30, 47},
+		{-40, -26},
+	}
+
+	res := eraseOverlapIntervals(intervals)
+	t.Log("res:", res)
+}
+
+func partitionLabels(s string) []int {
+	hash := [27]int{}
+	// 记录每个元素最后出现的位置
+	for i, v := range s {
+		hash[v-'a'] = i
+	}
+
+	// 找分割点
+	res := []int{}
+	left, right := 0, 0
+	for i, v := range s {
+		right = Max(right, hash[v-'a'])
+		if i == right {
+			res = append(res, right-left+1)
+			left = i + 1
+		}
+	}
+	return res
+}

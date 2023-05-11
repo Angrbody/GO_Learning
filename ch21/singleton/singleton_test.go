@@ -13,6 +13,7 @@ type Singleton struct {
 var SingleInstance *Singleton
 var once sync.Once
 
+// Go的单例模式（懒汉），非常简单
 func GetSingletonObj() *Singleton {
 	once.Do(func() {
 		fmt.Println("Create Obj!")
