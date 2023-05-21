@@ -49,3 +49,8 @@ func TestSyncPoolInMultiGoroutine(t *testing.T) {
 	}
 	wg.Wait()
 }
+
+// 合并区间
+func merge(intervals [][]int) [][]int {
+
+}

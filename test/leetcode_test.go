@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sort"
+	"strconv"
 	"testing"
 )
 
@@ -221,5 +222,52 @@ func partitionLabels(s string) []int {
 			left = i + 1
 		}
 	}
+	return res
+}
+
+// 合并区间
+func merge(intervals [][]int) [][]int {
+	// 按左边界排序
+	sort.Slice(intervals, func(i, j int) bool {
+		if intervals[i][0] == intervals[j][0] {
+			return intervals[i][1] < intervals[j][1]
+		}
+		return intervals[i][0] < intervals[j][0]
+	})
+
+	ret := [][]int{}
+	win := []int{intervals[0][0], intervals[0][1]}
+
+	for i := 1; i < len(intervals); i++ {
+		// 有重叠，更新当前区间
+		if intervals[i][0] <= win[1] {
+			win[1] = Max(intervals[i][1], win[1])
+			continue
+		}
+
+		// 不重叠，将当前窗口添加到ret中，并更新win
+		ret = append(ret, win)
+		win = []int{intervals[i][0], intervals[i][1]}
+	}
+
+	ret = append(ret, win)
+	return ret
+}
+
+func monotoneIncreasingDigits(n int) int {
+	var str string = strconv.Itoa(n)
+	work := []byte(str)
+	var size int = len(work)
+	for i := size - 1; i > 0; i-- {
+		if work[i] < work[i-1] {
+			work[i-1] -= 1
+			// 将后面的全部置为9
+			for j := i; j < size; j++ {
+				work[j] = '9'
+			}
+		}
+	}
+
+	res, _ := strconv.Atoi(string(work))
 	return res
 }
